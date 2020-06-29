@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
+const Routes = require("./Routes");
 
-app.get("/login", (req, res) => {
-  res.send({ name: "haji" });
-});
+app.use("/posts", Routes.Posts);
 
 app.listen(80);
