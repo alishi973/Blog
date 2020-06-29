@@ -12,6 +12,7 @@ app.use(CookieParser());
 app.use("/common", Routes.Commons);
 app.use("/posts", Routes.Posts);
 app.use("/auth", Routes.Auths);
+
 app.use("/static/images",express.static("uploads/images"))
 
 app.listen(process.env.PORT);
