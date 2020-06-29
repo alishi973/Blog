@@ -39,7 +39,15 @@ router.post(
     if (!req.body.username || !req.body.password)
       return res.status(400).send("نام کاربری یا کلمه عبور ارسال نشده است");
 
-    res.send(req.body);
+    const newUser = new UsersModel();
+    Object.assign(newUser, req.body);
+    try {
+      await newUser.save();
+    } catch (e) {
+      if (e.code == 11000) return res.send("نام کاربری از قبل موجود می باشد");
+      else res.send(e);
+    }
+    res.send(newUser);
   }
 );
 
