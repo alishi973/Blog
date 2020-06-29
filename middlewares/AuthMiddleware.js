@@ -1,4 +1,4 @@
 module.exports = (req, res, next) => {
-  req.isAuth = true;
+//   req.isAuth = true;
   next();
 };
