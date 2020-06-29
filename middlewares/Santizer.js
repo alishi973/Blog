@@ -6,5 +6,12 @@ module.exports = (req, props, removeEmptyEntity = false, next) => {
       Object.assign(verifiedBody, { [eachField]: req.body[eachField] })
   );
   req.body = verifiedBody;
+  if (removeEmptyEntity) {
+    for (let propName in req.body) {
+      if (req.body[propName].length < 1) delete req.body[propName];
+      else req.body[propName];
+    }
+  }
+
   next();
 };

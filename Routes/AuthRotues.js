@@ -32,7 +32,7 @@ router.post("/login", AuthMiddleware, async (req, res) => {
 });
 router.post(
   "/register",
-  (req, res, next) => Santizer(req, requiredProp, true,next),
+  (req, _, next) => Santizer(req, requiredProp, true, next),
   AuthMiddleware,
   async (req, res) => {
     if (req.isAuth) return res.status(200).send("ok");
