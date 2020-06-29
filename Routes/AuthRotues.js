@@ -43,11 +43,11 @@ router.post(
     Object.assign(newUser, req.body);
     try {
       await newUser.save();
+      res.send(newUser);
     } catch (e) {
-      if (e.code == 11000) return res.send("نام کاربری از قبل موجود می باشد");
+      if (e.code == 11000) res.send("نام کاربری از قبل موجود می باشد");
       else res.send(e);
     }
-    res.send(newUser);
   }
 );
 
