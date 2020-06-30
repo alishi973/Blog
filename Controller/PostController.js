@@ -10,5 +10,16 @@ module.exports = {
     await newPost.save();
     res.send(newPost);
   },
-  
+  Show: async (req, res) => {
+    let post;
+    try {
+      const postID = ObjectId(`${req.params.postID}`);
+      post = await PostModel.findById(postID);
+    } catch (e) {
+      return res.send("ایدی پست صحیح نیست");
+    }
+    
+    if (post) res.send(post);
+    else res.status(404).send("مورد پیدا نشد");
+  },
 };
