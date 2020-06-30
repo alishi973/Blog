@@ -10,6 +10,7 @@ const UserSchema = new Schema({
 });
 // UserSchema.pre("aggregate", function () {
 //   console.log(this);
+//   crypto.createHash('md5').update(data).digest("hex");
 // });
 
 module.exports = Mongoose.model("users", UserSchema);
