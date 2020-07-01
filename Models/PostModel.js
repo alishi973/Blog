@@ -14,6 +14,7 @@ const PostModel = new Schema(
       ref: "users",
       required: true,
     },
+    active: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

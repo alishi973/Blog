@@ -14,12 +14,19 @@ module.exports = {
     let post;
     try {
       const postID = ObjectId(`${req.params.postID}`);
-      post = await PostModel.findById(postID);
+      post = await PostModel.findOne({ id: postID, active: true });
     } catch (e) {
       return res.send("ایدی پست صحیح نیست");
     }
-    
+
     if (post) res.send(post);
     else res.status(404).send("مورد پیدا نشد");
+  },
+  Delete: async (req, res) => {
+    if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
+    const existPost = await PostModel.findById(req.query.id);
+    if (existPost) {
+      res.send(existPost);
+    }
   },
 };

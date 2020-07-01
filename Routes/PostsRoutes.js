@@ -14,5 +14,6 @@ router.post(
   PostController.PostController.NewPost
 );
 router.get("/:postID", PostController.PostController.Show);
+router.delete("/delete", AuthMiddleware, UserMiddleware, PostController.PostController.Delete);
 
 module.exports = router;
