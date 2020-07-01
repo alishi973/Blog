@@ -26,7 +26,13 @@ module.exports = {
     if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
     const existPost = await PostModel.findById(req.query.id);
     if (existPost) {
-      res.send(existPost);
-    }
+      if (req.user == existPost.creator) {
+        if (existPost.active) {
+          existPost.active = false;
+          await existPost.save();
+          return res.send(existPost);
+        } else return res.send("این پست قبلا تغیر کرده است");
+      } else return res.status(403).send("شما به این قسمت دسترسی ندارید");
+    } else return res.send("ایدی پست صحیح نیست");
   },
 };
