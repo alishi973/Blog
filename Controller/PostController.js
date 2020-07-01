@@ -14,7 +14,7 @@ module.exports = {
     let post;
     try {
       const postID = ObjectId(`${req.params.postID}`);
-      post = await PostModel.findOne({ id: postID, active: true });
+      post = await PostModel.findOne({ _id: postID, active: true });
     } catch (e) {
       return res.send("ایدی پست صحیح نیست");
     }
