@@ -6,7 +6,7 @@ module.exports = {
     const { title, content } = req.body;
     if (!title || !content) return res.send("متن و عنوان الزامی میباشد");
     const newPost = new PostModel();
-    Object.assign(newPost, { ...req.body, creator: req.user });
+    Object.assign(newPost, { ...req.body, creator: req.user._id });
     await newPost.save();
     res.send(newPost);
   },
@@ -26,7 +26,7 @@ module.exports = {
     if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
     const existPost = await PostModel.findById(req.query.id);
     if (existPost) {
-      if (req.user == existPost.creator) {
+      if (req.user._id == existPost.creator) {
         if (existPost.active) {
           existPost.active = false;
           await existPost.save();
@@ -39,7 +39,7 @@ module.exports = {
     if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
     const existPost = await PostModel.findById(req.query.id);
     if (existPost) {
-      if (req.user == existPost.creator) {
+      if (req.user._id == existPost.creator) {
         if (!existPost.active) {
           existPost.active = true;
           await existPost.save();
@@ -52,7 +52,7 @@ module.exports = {
     if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
     const existPost = await PostModel.findById(req.params.postID);
     if (existPost) {
-      if (req.user == existPost.creator) {
+      if (req.user._id == existPost.creator) {
         if (existPost.active) {
           Object.assign(existPost, req.body);
           await existPost.save();

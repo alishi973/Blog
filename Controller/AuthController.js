@@ -12,7 +12,7 @@ module.exports = {
     else {
       res.send({
         status: 200,
-        jwt: jwt.sign({ user }, process.env.JWT_SECRET),
+        jwt: jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: "1h" }),
       });
     }
   },
