@@ -12,8 +12,16 @@ router.post(
   AuthMiddleware,
   UserMiddleware,
   PostController.PostController.NewPost
-);
-router.get("/:postID", PostController.PostController.Show);
+); // Create Post
+router.get("/:postID", PostController.PostController.Show); // Show Post
+
+router.patch(
+  "/update/:postID",
+  (req, _, next) => Santizer(req, postFilter, true, next),
+  AuthMiddleware,
+  UserMiddleware,
+  PostController.PostController.Update
+); // Update Post
 router.delete("/disable", AuthMiddleware, UserMiddleware, PostController.PostController.Disable);
 router.post("/enable", AuthMiddleware, UserMiddleware, PostController.PostController.Enable);
 
