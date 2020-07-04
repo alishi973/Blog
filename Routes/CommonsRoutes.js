@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const AuthMiddleware = require("../middlewares/AuthMiddleware");
+const Controller = require("../Controller");
 
 const multer = require("multer");
 let upload = multer({ storage: multer.memoryStorage() });
@@ -23,5 +24,6 @@ router.post("/image/upload", AuthMiddleware, upload.single("image"), (req, res) 
   }
   res.status(400).send("عدم ثبت تصویر");
 });
+router.get("/feed", Controller.CommonController.Feed);
 
 module.exports = router;
