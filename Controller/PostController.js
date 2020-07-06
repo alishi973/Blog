@@ -64,7 +64,13 @@ module.exports = {
   Like: async (req, res) => {
     if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
     const { postId, rate } = req.body;
-    console.log(postId, rate);
-    res.send("ok");
+    const existPost = await PostModel.findById(postId);
+    if (existPost) {
+      if (!existPost.active) {
+        //Append To Liek
+        await existPost.save();
+        return res.send(existPost);
+      } else return res.send("این پست غیر فعال میباشد");
+    } else return res.send("ایدی پست صحیح نیست");
   },
 };
