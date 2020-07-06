@@ -61,4 +61,10 @@ module.exports = {
       } else return res.status(403).send("شما به این قسمت دسترسی ندارید");
     } else return res.send("ایدی پست صحیح نیست");
   },
+  Like: async (req, res) => {
+    if (!req.isAuth) return res.status(403).send("شما به این قسمت دسترسی ندارید");
+    const { postId, rate } = req.body;
+    console.log(postId, rate);
+    res.send("ok");
+  },
 };

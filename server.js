@@ -5,7 +5,7 @@ const app = express();
 const Routes = require("./Routes");
 const BodyParser = require("body-parser");
 
-app.use(BodyParser.urlencoded({ extended: true }));
+app.use(BodyParser.json());
 
 app.use("/common", Routes.Commons);
 app.use("/posts", Routes.Posts);

@@ -2,6 +2,7 @@ const UsersModel = require("../Models/UsersModel");
 const jwt = require("jsonwebtoken");
 module.exports = {
   Login: async (req, res) => {
+    console.log(req.body);
     if (req.isAuth) return res.status(200).send("ok");
     if (!req.body.username || !req.body.password) return res.status(400).send("نام کاربری یا کلمه عبور وجود ندارد");
     const user = await UsersModel.findOne({
@@ -17,7 +18,6 @@ module.exports = {
     }
   },
   Register: async (req, res) => {
-    console.log(req.isAuth);
     if (req.isAuth) return res.status(200).send("ok");
     if (!req.body.username || !req.body.password) return res.status(400).send("نام کاربری یا کلمه عبور ارسال نشده است");
 

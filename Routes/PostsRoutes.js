@@ -24,6 +24,7 @@ router.patch(
 ); // Update Post
 router.delete("/disable", AuthMiddleware, UserMiddleware, PostController.PostController.Disable);
 router.post("/enable", AuthMiddleware, UserMiddleware, PostController.PostController.Enable);
-router.post("/like", AuthMiddleware, UserMiddleware, PostController.PostController.Enable);
+
+router.post("/like", AuthMiddleware, UserMiddleware, PostController.PostController.Like);
 
 module.exports = router;
